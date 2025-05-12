@@ -1,0 +1,317 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Темная тема (по умолчанию) */
+body {
+  @apply bg-dark-800 text-white m-0 p-0;
+  min-height: 100vh;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Светлая тема */
+.light-theme {
+  background-color: #f8fafc;
+  color: #1e293b;
+}
+
+.light-theme .card {
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  color: #1e293b;
+  border: 1px solid #f1f5f9;
+  transition: all 0.3s ease-in-out;
+}
+
+.light-theme .input-field {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+  color: #1e293b;
+  transition: all 0.2s ease-in-out;
+}
+
+.light-theme select,
+.light-theme input {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+  color: #1e293b;
+  transition: all 0.2s ease-in-out;
+}
+
+.light-theme .bg-dark-700 {
+  background-color: #ffffff;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.light-theme .bg-dark-800 {
+  background-color: #f8fafc;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.light-theme .bg-dark-600 {
+  background-color: #f1f5f9;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.light-theme .text-white {
+  color: #1e293b;
+  transition: color 0.3s ease-in-out;
+}
+
+.light-theme .text-gray-400 {
+  color: #64748b;
+  transition: color 0.3s ease-in-out;
+}
+
+.light-theme .border-dark-600 {
+  border-color: #e2e8f0;
+  transition: border-color 0.3s ease-in-out;
+}
+
+/* Красивый фон для светлой темы с градиентом */
+.light-theme::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(224, 242, 254, 0.5), rgba(186, 230, 253, 0), rgba(224, 242, 254, 0.2));
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Добавляем стили для кнопок в светлой теме */
+.light-theme button.bg-dark-700 {
+  background-color: #f1f5f9;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease-in-out;
+}
+
+.light-theme button.bg-dark-700:hover {
+  background-color: #e2e8f0;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Улучшенные стили для карточек счетов */
+.light-theme .card.bg-green-500, 
+.light-theme .card.bg-blue-500, 
+.light-theme .card.bg-red-500 {
+  color: white;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+/* Улучшенные карточки счетов */
+.light-theme div[style*="background-color: rgb(16, 185, 129);"] {
+  background: linear-gradient(135deg, #10b981, #0d9488) !important;
+  box-shadow: 0 8px 16px rgba(16, 185, 129, 0.15) !important;
+  border: none !important;
+}
+
+.light-theme div[style*="background-color: rgb(59, 130, 246);"] {
+  background: linear-gradient(135deg, #3b82f6, #0ea5e9) !important;
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.15) !important;
+  border: none !important;
+}
+
+.light-theme div[style*="background-color: rgb(239, 68, 68);"] {
+  background: linear-gradient(135deg, #ef4444, #e11d48) !important;
+  box-shadow: 0 8px 16px rgba(239, 68, 68, 0.15) !important;
+  border: none !important;
+}
+
+/* Улучшаем визуализацию статистики */
+.light-theme div[class*="recharts"] {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
+}
+
+/* Улучшаем навигацию в светлой теме */
+.light-theme nav a {
+  color: #475569;
+  transition: all 0.2s ease;
+}
+
+.light-theme nav a:hover {
+  background-color: #f1f5f9;
+  color: #0284c7;
+  transform: translateX(2px);
+}
+
+.light-theme nav a.active {
+  background-color: #e0f2fe;
+  color: #0284c7;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(2, 132, 199, 0.1);
+}
+
+/* Адаптация боковой панели */
+.light-theme .bg-dark-900 {
+  background-color: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.02);
+}
+
+.light-theme .text-gray-300 {
+  color: #64748b;
+}
+
+/* Улучшаем отображение таблиц и списков */
+.light-theme table thead tr {
+  background-color: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.light-theme table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* Красивые транзакции */
+.light-theme tr {
+  transition: all 0.2s ease;
+}
+
+.light-theme tr:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Красивые селекты и формы */
+.light-theme select {
+  background-image: linear-gradient(to bottom, #ffffff, #f8fafc);
+  transition: all 0.2s ease;
+}
+
+.light-theme select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+/* Адаптация валюты */
+.light-theme span[class*="currency"] {
+  color: #1e293b;
+}
+
+/* Плавные переходы для всех элементов */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.app-container {
+  @apply min-h-screen flex flex-col;
+}
+
+/* Custom components */
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg transition-all duration-200 font-medium;
+  }
+
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-dark-800;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary-500 hover:bg-secondary-600 text-white;
+  }
+
+  .btn-outline {
+    @apply border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-dark-800;
+  }
+
+  .btn-danger {
+    @apply bg-accent-500 hover:bg-accent-600 text-white;
+  }
+
+  .input-field {
+    @apply px-4 py-2 bg-dark-700 border border-dark-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all;
+  }
+
+  .card {
+    @apply bg-dark-700 rounded-lg p-4 shadow-card;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-secondary-400;
+  }
+}
+
+/* Animations */
+.fade-in {
+  @apply animate-fade-in;
+}
+
+.slide-up {
+  @apply animate-slide-up;
+}
+
+/* Loader */
+.loader {
+  @apply relative w-12 h-12 rounded-full;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: theme('colors.primary.500');
+  animation: spin 1s linear infinite;
+}
+
+.loader-sm {
+  @apply w-6 h-6;
+  border-width: 2px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Skeleton loading */
+.skeleton {
+  @apply bg-dark-600 relative overflow-hidden;
+}
+
+.skeleton::after {
+  @apply absolute inset-0;
+  content: '';
+  animation: skeleton-loading 1.5s infinite;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+@keyframes skeleton-loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Адаптация для светлой темы */
+.light-theme .skeleton {
+  background-color: #e2e8f0;
+}
+
+.light-theme .skeleton::after {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}

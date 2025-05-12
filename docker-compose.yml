@@ -1,0 +1,103 @@
+version: '3.3'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    restart: always
+    ports:
+      - "8009:8009"
+    volumes:
+      - static-volume:/app/static
+      - media-volume:/app/media
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    # restart: always  # Временно отключаем для отладки
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/nginx/ssl/beeline_kz.pem:/etc/nginx/ssl/beeline_kz.pem
+      - /etc/nginx/ssl/beeline_kz.key:/etc/nginx/ssl/beeline_kz.key
+      - static-volume:/app/static
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  db:
+    image: postgres:15
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    networks:
+      - app-network
+
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - redis-data:/data
+    networks:
+      - app-network
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    restart: always
+    command: celery -A core worker --loglevel=info
+    volumes:
+      - static-volume:/app/static
+      - media-volume:/app/media
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+    networks:
+      - app-network
+
+  flower:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    restart: always
+    command: celery -A core flower --port=5555
+    ports:
+      - "5555:5555"
+    depends_on:
+      - worker
+    env_file:
+      - .env
+    networks:
+      - app-network
+
+volumes:
+  postgres-data:
+  redis-data:
+  static-volume:
+  media-volume:
+
+networks:
+  app-network:
+    driver: bridge
