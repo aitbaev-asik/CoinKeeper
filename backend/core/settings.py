@@ -139,7 +139,7 @@ SIMPLE_JWT = {
 }
 
 # CORS settings
-CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:5173,http://frontend:5173,https://iot-app.beeline.kz').split(',')
+CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:5173,http://frontend:5173').split(',')
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_METHODS = [
